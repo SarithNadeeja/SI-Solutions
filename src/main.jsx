@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import LandingPage from './components/LandingPage'
 import AboutPage from './components/AboutPage'
 import ProductsPage from './components/ProductsPage'
@@ -12,7 +12,7 @@ import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter basename="/SI-Solutions">
+    <HashRouter>
       <Cursor />
       <Routes>
         <Route path="/" element={<LandingPage />} />
@@ -22,6 +22,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/features" element={<FeaturesPage />} />
         <Route path="/contact" element={<ContactPage />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   </React.StrictMode>,
 )
