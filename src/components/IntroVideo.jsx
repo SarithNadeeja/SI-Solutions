@@ -61,7 +61,7 @@ export default function IntroVideo({ onIntroEnd, isFadingOut }) {
     >
       <video
         className="intro-video"
-        src={`${import.meta.env.BASE_URL}intro.mp4`}
+        src={`${import.meta.env.BASE_URL}videos/intro.mp4`}
         autoPlay
         muted
         playsInline
