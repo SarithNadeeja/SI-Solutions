@@ -12,7 +12,7 @@ import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/SI-Solutions">
       <Cursor />
       <Routes>
         <Route path="/" element={<LandingPage />} />
