@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 
 const navItems = [
@@ -5,12 +6,27 @@ const navItems = [
   'About',
   'Products',
   'Solutions',
-  'Projects',
   'Features',
   'Contact us',
 ]
 
+function getNavHref(label) {
+  if (label === 'Home') return '/'
+  if (label === 'About') return '/about'
+  if (label === 'Products') return '/products'
+  if (label === 'Solutions') return '/solutions'
+  if (label === 'Features') return '/features'
+  if (label === 'Contact us') return '/contact'
+  return '#'
+}
+
 export default function Navbar({ isVisible }) {
+  const [open, setOpen] = useState(false)
+
+  const handleNavClick = () => {
+    setOpen(false)
+  }
+
   return (
     <motion.header
       className="navbar"
@@ -31,57 +47,36 @@ export default function Navbar({ isVisible }) {
         ease: [0.25, 0.46, 0.45, 0.94],
         delay: 0.15,
       }}
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 10,
-        padding: '1.5rem 2rem',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        background: 'transparent',
-      }}
     >
-      <span
-        className="navbar-logo"
-        style={{
-          fontWeight: 700,
-          fontSize: '1.25rem',
-          letterSpacing: '-0.02em',
-        }}
-      >
-        SI Solutions
-      </span>
-      <nav
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '2rem',
-        }}
-      >
-        {navItems.map((label) => (
-          <a
-            key={label}
-            href="#"
-            style={{
-              fontSize: '0.9375rem',
-              fontWeight: 500,
-              color: 'rgba(255,255,255,0.9)',
-              transition: 'color 0.2s ease',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.color = '#fff'
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.color = 'rgba(255,255,255,0.9)'
-            }}
-          >
-            {label}
-          </a>
-        ))}
-      </nav>
+      <div className="navbar__inner">
+        <a href="/" className="navbar-logo">
+          <img src="/assets/logo.png" alt="SI Solutions logo" />
+        </a>
+
+        <button
+          type="button"
+          className="navbar__toggle"
+          aria-label="Toggle navigation"
+          aria-expanded={open}
+          onClick={() => setOpen((v) => !v)}
+        >
+          <span />
+          <span />
+        </button>
+
+        <nav className={`navbar__nav ${open ? 'navbar__nav--open' : ''}`}>
+          {navItems.map((label) => (
+            <a
+              key={label}
+              href={getNavHref(label)}
+              className="navbar__link"
+              onClick={handleNavClick}
+            >
+              {label}
+            </a>
+          ))}
+        </nav>
+      </div>
     </motion.header>
   )
 }

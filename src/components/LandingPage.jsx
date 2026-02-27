@@ -2,6 +2,12 @@ import { useState, useCallback, useEffect } from 'react'
 import IntroVideo from './IntroVideo'
 import Navbar from './Navbar'
 import HeroSection from './HeroSection'
+import ProductsSection from './ProductsSection'
+import SolutionsSection from './SolutionsSection'
+import ClientsSection from './ClientsSection'
+import FeaturesSection from './FeaturesSection'
+import AboutCompanySection from './AboutCompanySection'
+import Footer from './Footer'
 
 const FADE_DURATION_MS = 800
 
@@ -26,9 +32,15 @@ export default function LandingPage() {
       {showIntro && (
         <IntroVideo onIntroEnd={handleIntroEnd} isFadingOut={fadingOut} />
       )}
-      <div style={{ background: '#000000', minHeight: '100vh' }}>
+      <div className="main-banner" style={{ background: '#000000' }}>
         <Navbar isVisible={showHero} />
         {showHero && <HeroSection />}
+        {showHero && <SolutionsSection />}
+        {showHero && <FeaturesSection />}
+        {showHero && <ProductsSection />}
+        {showHero && <ClientsSection />}
+        {showHero && <AboutCompanySection />}
+        {showHero && <Footer />}
       </div>
     </>
   )
