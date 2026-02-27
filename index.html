@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SI Solutions – Physical Security Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet">
+    <script type="module" crossorigin src="/SI-Solutions/assets/index-CclwpuTg.js"></script>
+    <link rel="stylesheet" crossorigin href="/SI-Solutions/assets/index-B9KooE7v.css">
+  </head>
+  <body>
+    <div id="root">
+      <div class="app-loader" id="app-loader" aria-hidden="true">
+        <div class="app-loader__scanline"></div>
+        <div class="app-loader__grid">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span class="app-loader__node"></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="app-loader__ring">
+          <div class="app-loader__ring-segment"></div>
+          <div class="app-loader__ring-segment"></div>
+          <div class="app-loader__ring-segment"></div>
+          <div class="app-loader__ring-segment"></div>
+          <div class="app-loader__ring-segment"></div>
+          <div class="app-loader__ring-segment"></div>
+        </div>
+        <p class="app-loader__label">Initializing</p>
+      </div>
+    </div>
+    <style>
+      .app-loader {
+        position: fixed;
+        inset: 0;
+        background: #000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        overflow: hidden;
+      }
+      .app-loader__scanline {
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent 0%, rgba(0, 255, 170, 0.15) 20%, rgba(0, 255, 170, 0.8) 50%, rgba(0, 255, 170, 0.15) 80%, transparent 100%);
+        box-shadow: 0 0 20px rgba(0, 255, 170, 0.5);
+        animation: app-loader-scan 1.8s ease-in-out infinite;
+      }
+      .app-loader__grid {
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        gap: 6px;
+      }
+      .app-loader__grid span {
+        background: rgba(255, 255, 255, 0.06);
+        border-radius: 2px;
+        animation: app-loader-cell 2s ease-in-out infinite;
+      }
+      .app-loader__grid span:nth-child(1) { animation-delay: 0s; }
+      .app-loader__grid span:nth-child(2) { animation-delay: 0.05s; }
+      .app-loader__grid span:nth-child(3) { animation-delay: 0.1s; }
+      .app-loader__grid span:nth-child(4) { animation-delay: 0.15s; }
+      .app-loader__grid span:nth-child(5) { animation-delay: 0.2s; }
+      .app-loader__grid span:nth-child(6) { animation-delay: 0.25s; }
+      .app-loader__grid span:nth-child(7) { animation-delay: 0.3s; }
+      .app-loader__grid span:nth-child(8) { animation-delay: 0.35s; }
+      .app-loader__grid span:nth-child(9) { animation-delay: 0.4s; }
+      .app-loader__grid span:nth-child(10) { animation-delay: 0.45s; }
+      .app-loader__grid span:nth-child(11) { animation-delay: 0.5s; }
+      .app-loader__grid span:nth-child(12) { animation-delay: 0.55s; }
+      .app-loader__grid span:nth-child(13) { animation-delay: 0.6s; }
+      .app-loader__grid span:nth-child(14) { animation-delay: 0.65s; }
+      .app-loader__grid span:nth-child(15) { animation-delay: 0.7s; }
+      .app-loader__grid span:nth-child(16) { animation-delay: 0.75s; }
+      .app-loader__grid span:nth-child(17) { animation-delay: 0.8s; }
+      .app-loader__grid span:nth-child(18) { animation-delay: 0.85s; }
+      .app-loader__grid span:nth-child(19) { animation-delay: 0.9s; }
+      .app-loader__grid span:nth-child(20) { animation-delay: 0.95s; }
+      .app-loader__grid span:nth-child(21) { animation-delay: 1s; }
+      .app-loader__grid span:nth-child(22) { animation-delay: 1.05s; }
+      .app-loader__grid span:nth-child(23) { animation-delay: 1.1s; }
+      .app-loader__grid span:nth-child(24) { animation-delay: 1.15s; }
+      .app-loader__grid span:nth-child(25) { animation-delay: 1.2s; }
+      .app-loader__grid .app-loader__node {
+        background: rgba(0, 255, 170, 0.4);
+        box-shadow: 0 0 12px rgba(0, 255, 170, 0.6);
+        animation: app-loader-node 1.2s ease-in-out infinite;
+      }
+      .app-loader__ring {
+        position: relative;
+        width: 56px;
+        height: 56px;
+        margin-bottom: 24px;
+      }
+      .app-loader__ring-segment {
+        position: absolute;
+        inset: 0;
+        border: 2px solid transparent;
+        border-top-color: rgba(0, 255, 170, 0.9);
+        border-radius: 50%;
+        animation: app-loader-spin 0.9s linear infinite;
+      }
+      .app-loader__ring-segment:nth-child(2) { animation-delay: 0.15s; border-top-color: rgba(0, 255, 170, 0.6); }
+      .app-loader__ring-segment:nth-child(3) { animation-delay: 0.3s; border-top-color: rgba(0, 255, 170, 0.4); }
+      .app-loader__ring-segment:nth-child(4) { animation-delay: 0.45s; border-top-color: rgba(0, 255, 170, 0.25); }
+      .app-loader__ring-segment:nth-child(5) { animation-delay: 0.6s; border-top-color: rgba(0, 255, 170, 0.15); }
+      .app-loader__ring-segment:nth-child(6) { animation-delay: 0.75s; border-top-color: rgba(0, 255, 170, 0.08); }
+      .app-loader__label {
+        font-family: 'DM Sans', system-ui, sans-serif;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.2em;
+        color: rgba(255, 255, 255, 0.5);
+        text-transform: uppercase;
+        margin: 0;
+      }
+      @keyframes app-loader-scan {
+        0%, 100% { top: 35%; opacity: 0.6; }
+        50% { top: 65%; opacity: 1; }
+      }
+      @keyframes app-loader-cell {
+        0%, 100% { opacity: 0.15; transform: scale(0.95); }
+        50% { opacity: 0.5; transform: scale(1); }
+      }
+      @keyframes app-loader-node {
+        0%, 100% { opacity: 0.4; box-shadow: 0 0 12px rgba(0, 255, 170, 0.6); }
+        50% { opacity: 1; box-shadow: 0 0 24px rgba(0, 255, 170, 0.9); }
+      }
+      @keyframes app-loader-spin {
+        to { transform: rotate(360deg); }
+      }
+    </style>
+  </body>
+</html>
