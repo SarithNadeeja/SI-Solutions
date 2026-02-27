@@ -1,18 +1,18 @@
 import { useState, useEffect } from 'react'
 
 const PRODUCT_IMAGES = [
-  { src: '/assets/products/product_2.jpg', label: 'Product' },
-  { src: '/assets/products/product_3.jpg', label: 'Product' },
-  { src: '/assets/products/product_4.jpg', label: 'Product' },
-  { src: '/assets/products/product_6.jpg', label: 'Product' },
-  { src: '/assets/products/product_7.jpg', label: 'Product' },
-  { src: '/assets/products/product_8.jpg', label: 'Product' },
-  { src: '/assets/products/product_9.jpg', label: 'Product' },
-  { src: '/assets/products/product_12.jpg', label: 'Product' },
-  { src: '/assets/products/product_14.jpg', label: 'Product' },
-  { src: '/assets/products/product_15.jpg', label: 'Product' },
-  { src: '/assets/products/product_16.jpg', label: 'Product' },
-  { src: '/assets/products/product_17.jpg', label: 'Product' },
+  { src: `${import.meta.env.BASE_URL}assets/products/product_2.jpg`, label: 'Product' },
+  { src: `${import.meta.env.BASE_URL}assets/products/product_3.jpg`, label: 'Product' },
+  { src: `${import.meta.env.BASE_URL}assets/products/product_4.jpg`, label: 'Product' },
+  { src: `${import.meta.env.BASE_URL}assets/products/product_6.jpg`, label: 'Product' },
+  { src: `${import.meta.env.BASE_URL}assets/products/product_7.jpg`, label: 'Product' },
+  { src: `${import.meta.env.BASE_URL}assets/products/product_8.jpg`, label: 'Product' },
+  { src: `${import.meta.env.BASE_URL}assets/products/product_9.jpg`, label: 'Product' },
+  { src: `${import.meta.env.BASE_URL}assets/products/product_12.jpg`, label: 'Product' },
+  { src: `${import.meta.env.BASE_URL}assets/products/product_14.jpg`, label: 'Product' },
+  { src: `${import.meta.env.BASE_URL}assets/products/product_15.jpg`, label: 'Product' },
+  { src: `${import.meta.env.BASE_URL}assets/products/product_16.jpg`, label: 'Product' },
+  { src: `${import.meta.env.BASE_URL}assets/products/product_17.jpg`, label: 'Product' },
 ]
 
 const VISIBLE_RADIUS = 3

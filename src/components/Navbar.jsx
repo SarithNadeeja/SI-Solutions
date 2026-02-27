@@ -50,7 +50,7 @@ export default function Navbar({ isVisible }) {
     >
       <div className="navbar__inner">
         <a href="/" className="navbar-logo">
-          <img src="/assets/logo.png" alt="SI Solutions logo" />
+          <img src={`${import.meta.env.BASE_URL}assets/logo.png`} alt="SI Solutions logo" />
         </a>
 
         <button

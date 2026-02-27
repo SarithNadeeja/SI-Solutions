@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react'
 
 const CLIENT_IMAGES = [
-  { src: '/assets/clients/client_1.jpg', label: 'Client' },
-  { src: '/assets/clients/client_2.jpg', label: 'Client' },
-  { src: '/assets/clients/client_3.jpg', label: 'Client' },
-  { src: '/assets/clients/client_4.jpg', label: 'Client' },
-  { src: '/assets/clients/client_5.jpg', label: 'Client' },
-  { src: '/assets/clients/client_6.jpg', label: 'Client' },
-  { src: '/assets/clients/client_7.jpg', label: 'Client' },
-  { src: '/assets/clients/client_8.jpg', label: 'Client' },
-  { src: '/assets/clients/client_9.jpg', label: 'Client' },
+  { src: `${import.meta.env.BASE_URL}assets/clients/client_1.jpg`, label: 'Client' },
+  { src: `${import.meta.env.BASE_URL}assets/clients/client_2.jpg`, label: 'Client' },
+  { src: `${import.meta.env.BASE_URL}assets/clients/client_3.jpg`, label: 'Client' },
+  { src: `${import.meta.env.BASE_URL}assets/clients/client_4.jpg`, label: 'Client' },
+  { src: `${import.meta.env.BASE_URL}assets/clients/client_5.jpg`, label: 'Client' },
+  { src: `${import.meta.env.BASE_URL}assets/clients/client_6.jpg`, label: 'Client' },
+  { src: `${import.meta.env.BASE_URL}assets/clients/client_7.jpg`, label: 'Client' },
+  { src: `${import.meta.env.BASE_URL}assets/clients/client_8.jpg`, label: 'Client' },
+  { src: `${import.meta.env.BASE_URL}assets/clients/client_9.jpg`, label: 'Client' },
 ]
 
 const VISIBLE_RADIUS = 3

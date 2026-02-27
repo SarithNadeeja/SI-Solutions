@@ -5,7 +5,7 @@ const SOLUTIONS = [
   {
     id: 1,
     title: 'CCTV Surveillance System',
-    image: '/assets/cctv.jpg',
+    image: `${import.meta.env.BASE_URL}assets/cctv.jpg`,
     features: [
       'Installation and Setup',
       'Monitoring and Surveillance',
@@ -17,7 +17,7 @@ const SOLUTIONS = [
   {
     id: 2,
     title: 'Access Control Systems',
-    image: '/assets/access_control.jpg',
+    image: `${import.meta.env.BASE_URL}assets/access_control.jpg`,
     features: [
       'System Design and Installation',
       'User Management and Authentication',
@@ -29,7 +29,7 @@ const SOLUTIONS = [
   {
     id: 3,
     title: 'Fire Detection System',
-    image: '/assets/fire.png',
+    image: `${import.meta.env.BASE_URL}assets/fire.png`,
     features: [
       'Fire Detection',
       'Alerting and Notification',
@@ -43,7 +43,7 @@ const SOLUTIONS = [
   {
     id: 4,
     title: 'Security Alarm System',
-    image: '/assets/security_alarm_1.jpg',
+    image: `${import.meta.env.BASE_URL}assets/security_alarm_1.jpg`,
     features: [
       'Monitoring and Analysis',
       'Threat Detection',
