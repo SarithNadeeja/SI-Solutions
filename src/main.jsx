@@ -21,7 +21,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/solutions" element={<SolutionsPage />} />
         <Route path="/features" element={<FeaturesPage />} />
         <Route path="/contact" element={<ContactPage />} />
-      </Routes>
+     </Routes>
     </HashRouter>
   </React.StrictMode>,
 )
