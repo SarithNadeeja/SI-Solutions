@@ -1,3 +1,7 @@
+import { useRef, useState } from 'react'
+import { motion, useInView } from 'framer-motion'
+import ContactModal from "./ContactModel"
+
 const OFFERINGS = [
   {
     id: 1,
@@ -83,19 +87,33 @@ const OFFERINGS = [
 ]
 
 export default function AboutCompanySection() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: false, margin: '-80px' })
+  const [isContactOpen, setIsContactOpen] = useState(false)
+
   return (
-    <section className="about-company">
+    <section className="about-company" ref={ref}>
       <div className="about-company__inner">
-        <header className="about-company__header">
+        <motion.header
+          className="about-company__header"
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
           <p className="about-company__eyebrow">ABOUT</p>
           <h2 className="about-company__title">About Our Company</h2>
           <p className="about-company__lead">
             At SI Solutions (Pvt) Ltd, we deliver cutting-edge surveillance systems designed
             for the evolving security needs of modern environments.
           </p>
-        </header>
+        </motion.header>
 
-        <div className="about-company__main">
+        <motion.div
+          className="about-company__main"
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
           <div className="about-company__about">
             <h3 className="about-company__subheading">Who we are</h3>
             <p className="about-company__text">
@@ -111,34 +129,58 @@ export default function AboutCompanySection() {
               commitment to quality, we deliver reliable, future-ready security systems.
             </p>
           </aside>
-        </div>
+        </motion.div>
 
         <section className="about-company__offerings">
           <div className="about-company__offerings-header">
             <h3 className="about-company__offerings-title">What We Offer</h3>
           </div>
           <div className="about-company__offerings-grid">
-            {OFFERINGS.map((offering) => (
-              <article key={offering.id} className="about-company__offering">
+            {OFFERINGS.map((offering, index) => (
+              <motion.article
+                key={offering.id}
+                className="about-company__offering"
+                initial={{ opacity: 0, y: 32 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
+                transition={{
+                  duration: 0.4,
+                  delay: isInView ? index * 0.08 : 0,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+              >
                 <div className="about-company__offering-icon" aria-hidden="true">
                   {offering.icon}
                 </div>
                 <h4 className="about-company__offering-title">{offering.title}</h4>
                 <p className="about-company__offering-text">{offering.description}</p>
-              </article>
+              </motion.article>
             ))}
           </div>
         </section>
 
-        <div className="about-company__cta">
+        <motion.div
+          className="about-company__cta"
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
           <p className="about-company__cta-text">
             Ready to upgrade your security infrastructure?
           </p>
-          <a href="#contact" className="secondary-btn about-company__cta-button">
+          <button
+            type="button"
+            className="secondary-btn"
+            onClick={() => setIsContactOpen(true)}
+          >
             Contact Us
-          </a>
-        </div>
+          </button>
+        </motion.div>
       </div>
+
+      <ContactModal
+        isOpen={isContactOpen}
+        onClose={() => setIsContactOpen(false)}
+      />
     </section>
   )
 }

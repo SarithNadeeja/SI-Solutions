@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { useState, useEffect } from 'react'
+import ContactModal from "./ContactModel"
 
 const ROTATE_INTERVAL_MS = 5500
 const BANNERS = [
@@ -18,6 +19,7 @@ const BANNERS = [
 ]
 
 export default function HeroSection() {
+  const [isContactOpen, setIsContactOpen] = useState(false)
   const [index, setIndex] = useState(0)
 
   useEffect(() => {
@@ -76,12 +78,20 @@ export default function HeroSection() {
         </div>
 
         <div className="hero-buttons">
-          <a href="#contact" className="secondary-btn">
+          <button
+            type="button"
+            className="secondary-btn"
+            onClick={() => setIsContactOpen(true)}
+          >
             Contact Us
-          </a>
+          </button>
         </div>
       </motion.div>
       </div>
+      <ContactModal
+        isOpen={isContactOpen}
+        onClose={() => setIsContactOpen(false)}
+      />
     </section>
   )
 }

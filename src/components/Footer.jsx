@@ -1,3 +1,6 @@
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
+
 const USEFUL_LINKS = [
   { label: 'Home', href: '#' },
   { label: 'About', href: '#' },
@@ -77,8 +80,17 @@ function SocialIcon({ href, label, icon }) {
 }
 
 export default function Footer() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: false, margin: '-60px' })
+
   return (
-    <footer className="footer">
+    <motion.footer
+      className="footer"
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+    >
       <div className="footer__inner">
         <div className="footer__grid">
           <div className="footer__col footer__col--company">
@@ -128,6 +140,6 @@ export default function Footer() {
           </a>
         </p>
       </div>
-    </footer>
+    </motion.footer>
   )
 }

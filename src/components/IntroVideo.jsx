@@ -1,17 +1,17 @@
-import { useCallback, useRef, useEffect } from 'react'
+import { useCallback, useRef, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
 /**
  * Fullscreen intro video (2s). Fades out when ended, then calls onIntroEnd.
  * Place your 2-second CCTV lens zoom MP4 in public/intro.mp4
- * If the video fails to load, triggers onIntroEnd after 2.5s so you can test the hero.
+ * If the video fails to load, triggers onIntroEnd after fallback so you can test the hero.
  */
-/** Start navbar + hero animation this many seconds before video ends (overlay on video) */
 const START_ANIMATION_BEFORE_END_SECONDS = 1.2
 
 export default function IntroVideo({ onIntroEnd, isFadingOut }) {
   const fallbackTimeout = useRef(null)
   const hasTriggered = useRef(false)
+  const [isVideoReady, setIsVideoReady] = useState(false)
 
   const triggerHero = useCallback(() => {
     if (hasTriggered.current) return
@@ -19,6 +19,13 @@ export default function IntroVideo({ onIntroEnd, isFadingOut }) {
     if (fallbackTimeout.current) clearTimeout(fallbackTimeout.current)
     onIntroEnd()
   }, [onIntroEnd])
+
+  useEffect(() => {
+    fallbackTimeout.current = setTimeout(triggerHero, 4000)
+    return () => {
+      if (fallbackTimeout.current) clearTimeout(fallbackTimeout.current)
+    }
+  }, [triggerHero])
 
   const handleTimeUpdate = useCallback(
     (e) => {
@@ -30,15 +37,20 @@ export default function IntroVideo({ onIntroEnd, isFadingOut }) {
         triggerHero()
       }
     },
-    [triggerHero]
+    [triggerHero],
   )
 
-  useEffect(() => {
-    fallbackTimeout.current = setTimeout(triggerHero, 800)
-    return () => {
-      if (fallbackTimeout.current) clearTimeout(fallbackTimeout.current)
-    }
+  const handleEnded = useCallback(() => {
+    triggerHero()
   }, [triggerHero])
+
+  const handleError = useCallback(() => {
+    triggerHero()
+  }, [triggerHero])
+
+  const handleCanPlayThrough = useCallback(() => {
+    setIsVideoReady(true)
+  }, [])
 
   return (
     <motion.div
@@ -59,19 +71,39 @@ export default function IntroVideo({ onIntroEnd, isFadingOut }) {
         background: '#000',
       }}
     >
+      {!isVideoReady && (
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'rgba(255,255,255,0.6)',
+            fontSize: '0.85rem',
+            letterSpacing: '0.16em',
+            textTransform: 'uppercase',
+          }}
+        >
+          Initializing...
+        </div>
+      )}
+
       <video
         className="intro-video"
-        src={`${import.meta.env.BASE_URL}videos/intro.mp4`}
+        src={`${import.meta.env.BASE_URL}intro.mp4`}
         autoPlay
         muted
         playsInline
+        onCanPlayThrough={handleCanPlayThrough}
         onTimeUpdate={handleTimeUpdate}
-        onEnded={triggerHero}
-        onError={triggerHero}
+        onEnded={handleEnded}
+        onError={handleError}
         style={{
           width: '100%',
           height: '100%',
           objectFit: 'cover',
+          visibility: isVideoReady ? 'visible' : 'hidden',
         }}
       />
     </motion.div>

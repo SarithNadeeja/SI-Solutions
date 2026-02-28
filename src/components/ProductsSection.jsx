@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
 
 const PRODUCT_IMAGES = [
   { src: `${import.meta.env.BASE_URL}assets/products/product_2.jpg`, label: 'Product' },
@@ -28,6 +29,8 @@ function wrapOffset(index, center, n) {
 export default function ProductsSection() {
   const products = PRODUCT_IMAGES
   const [centerIndex, setCenterIndex] = useState(0)
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: false, margin: '-80px' })
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -39,16 +42,26 @@ export default function ProductsSection() {
   const n = products.length
 
   return (
-    <section className="products-section">
+    <section className="products-section" ref={ref}>
       <div className="products-section__inner">
-        <header className="products-section__header">
+        <motion.header
+          className="products-section__header"
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
           <h2 className="products-section__title">Our Products</h2>
           <p className="products-section__subtitle">
             We introduce world renowned products for our clients
           </p>
-        </header>
+        </motion.header>
 
-        <div className="products-stage">
+        <motion.div
+          className="products-stage"
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
           <div className="products-stage__track">
             {products.map((product, index) => {
               const offset = wrapOffset(index, centerIndex, n)
@@ -75,7 +88,7 @@ export default function ProductsSection() {
               )
             })}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

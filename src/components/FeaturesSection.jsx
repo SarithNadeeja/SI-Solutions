@@ -1,3 +1,6 @@
+import { useRef } from 'react'
+import { motion, useInView } from 'framer-motion'
+
 const FEATURES = [
   {
     id: 1,
@@ -47,25 +50,43 @@ const FEATURES = [
 ]
 
 export default function FeaturesSection() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: false, margin: '-80px' })
+
   return (
-    <section className="features-section">
+    <section className="features-section" ref={ref}>
       <div className="features-section__inner">
-        <header className="features-section__header">
+        <motion.header
+          className="features-section__header"
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
           <h2 className="features-section__title">Our Features</h2>
           <p className="features-section__subtitle">
             Experience unmatched excellence with our professional team, delivering reliable and innovative security solutions.
           </p>
-        </header>
+        </motion.header>
 
         <div className="features-section__grid">
-          {FEATURES.map((feature) => (
-            <article key={feature.id} className="features-card">
+          {FEATURES.map((feature, index) => (
+            <motion.article
+              key={feature.id}
+              className="features-card"
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
+              transition={{
+                duration: 0.45,
+                delay: isInView ? index * 0.08 : 0,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+            >
               <div className="features-card__icon" aria-hidden="true">
                 {feature.icon}
               </div>
               <h3 className="features-card__title">{feature.title}</h3>
               <p className="features-card__description">{feature.description}</p>
-            </article>
+            </motion.article>
           ))}
         </div>
       </div>
