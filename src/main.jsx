@@ -8,20 +8,23 @@ import SolutionsPage from './components/SolutionsPage'
 import FeaturesPage from './components/FeaturesPage'
 import ContactPage from './components/ContactPage'
 import Cursor from './components/Cursor'
+import { ThemeProvider } from './context/ThemeContext'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Cursor />
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/products" element={<ProductsPage />} />
-        <Route path="/solutions" element={<SolutionsPage />} />
-        <Route path="/features" element={<FeaturesPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-     </Routes>
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
+        <Cursor />
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/solutions" element={<SolutionsPage />} />
+          <Route path="/features" element={<FeaturesPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Routes>
+      </BrowserRouter>
+    </ThemeProvider>
   </React.StrictMode>,
 )

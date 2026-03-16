@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import { useTheme } from '../context/ThemeContext'
 
 const navItems = [
   'Home',
@@ -22,6 +23,7 @@ function getNavHref(label) {
 
 export default function Navbar({ isVisible }) {
   const [open, setOpen] = useState(false)
+  const { theme, toggleTheme } = useTheme()
 
   const handleNavClick = () => {
     setOpen(false)
@@ -75,6 +77,18 @@ export default function Navbar({ isVisible }) {
               {label}
             </a>
           ))}
+          <button
+            type="button"
+            className={`navbar__theme-toggle navbar__theme-toggle--${theme}`}
+            onClick={toggleTheme}
+            aria-label={theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'}
+          >
+            <span className="navbar__theme-track">
+              <span className="navbar__theme-icon navbar__theme-icon--sun">☀️</span>
+              <span className="navbar__theme-icon navbar__theme-icon--moon">☾</span>
+              <span className="navbar__theme-thumb" />
+            </span>
+          </button>
         </nav>
       </div>
     </motion.header>
