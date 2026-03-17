@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useTheme } from '../context/ThemeContext'
 
@@ -24,6 +25,7 @@ function getNavHref(label) {
 export default function Navbar({ isVisible }) {
   const [open, setOpen] = useState(false)
   const { theme, toggleTheme } = useTheme()
+  const { pathname } = useLocation()
 
   const handleNavClick = () => {
     setOpen(false)
@@ -51,9 +53,9 @@ export default function Navbar({ isVisible }) {
       }}
     >
       <div className="navbar__inner">
-        <a href="/" className="navbar-logo">
+        <Link to="/" className="navbar-logo">
           <img src={`${import.meta.env.BASE_URL}assets/logo.png`} alt="SI Solutions logo" />
-        </a>
+        </Link>
 
         <button
           type="button"
@@ -67,16 +69,20 @@ export default function Navbar({ isVisible }) {
         </button>
 
         <nav className={`navbar__nav ${open ? 'navbar__nav--open' : ''}`}>
-          {navItems.map((label) => (
-            <a
-              key={label}
-              href={getNavHref(label)}
-              className="navbar__link"
-              onClick={handleNavClick}
-            >
-              {label}
-            </a>
-          ))}
+          {navItems.map((label) => {
+            const to = getNavHref(label)
+            const isActive = to === '/' ? pathname === '/' : pathname.startsWith(to)
+            return (
+              <Link
+                key={label}
+                to={to}
+                className={`navbar__link ${isActive ? 'navbar__link--active' : ''}`}
+                onClick={handleNavClick}
+              >
+                {label}
+              </Link>
+            )
+          })}
           <button
             type="button"
             className={`navbar__theme-toggle navbar__theme-toggle--${theme}`}

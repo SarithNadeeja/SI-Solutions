@@ -18,6 +18,7 @@ const PRODUCT_IMAGES = [
 
 const VISIBLE_RADIUS = 3
 const AUTO_ADVANCE_MS = 5000
+const DRAG_STEP_PX = 60
 
 function wrapOffset(index, center, n) {
   let offset = index - center
@@ -29,17 +30,41 @@ function wrapOffset(index, center, n) {
 export default function ProductsSection() {
   const products = PRODUCT_IMAGES
   const [centerIndex, setCenterIndex] = useState(0)
+   const [isDragging, setIsDragging] = useState(false)
   const ref = useRef(null)
   const isInView = useInView(ref, { once: false, margin: '-80px' })
+  const dragStartX = useRef(0)
 
   useEffect(() => {
+    if (isDragging) return
     const id = setInterval(() => {
       setCenterIndex((i) => (i + 1) % products.length)
     }, AUTO_ADVANCE_MS)
     return () => clearInterval(id)
-  }, [products.length])
+  }, [products.length, isDragging])
 
   const n = products.length
+
+  const handlePointerDown = (e) => {
+    e.preventDefault()
+    setIsDragging(true)
+    dragStartX.current = e.clientX ?? (e.touches && e.touches[0]?.clientX) ?? 0
+  }
+
+  const handlePointerMove = (e) => {
+    if (!isDragging) return
+    const clientX = e.clientX ?? (e.touches && e.touches[0]?.clientX) ?? 0
+    const deltaX = clientX - dragStartX.current
+    if (Math.abs(deltaX) >= DRAG_STEP_PX) {
+      const direction = deltaX > 0 ? -1 : 1
+      setCenterIndex((i) => (i + direction + n) % n)
+      dragStartX.current = clientX
+    }
+  }
+
+  const handlePointerUp = () => {
+    setIsDragging(false)
+  }
 
   return (
     <section className="products-section" ref={ref}>
@@ -62,7 +87,16 @@ export default function ProductsSection() {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="products-stage__track">
+          <div
+            className="products-stage__track"
+            onMouseDown={handlePointerDown}
+            onMouseMove={handlePointerMove}
+            onMouseUp={handlePointerUp}
+            onMouseLeave={handlePointerUp}
+            onTouchStart={handlePointerDown}
+            onTouchMove={handlePointerMove}
+            onTouchEnd={handlePointerUp}
+          >
             {products.map((product, index) => {
               const offset = wrapOffset(index, centerIndex, n)
               const absOffset = Math.abs(offset)

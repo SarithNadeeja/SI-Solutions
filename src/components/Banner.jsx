@@ -6,7 +6,7 @@ const SLIDES = [
   {
     id: 1,
     label: 'Security Excellence',
-    headline: 'The World Best Products',
+    headline: 'The World Best Products for You',
     description:
       'Comprehensive physical security solutions engineered for 24/7 protection and operational efficiency.',
   },
@@ -36,7 +36,7 @@ export default function Banner() {
     return () => clearInterval(id)
   }, [])
 
-  // Load LottieFiles web component once (no npm dependency)
+  // Ensure Lottie web component script is loaded once
   useEffect(() => {
     if (document.querySelector('script[data-lottie-player]')) return
     const script = document.createElement('script')
@@ -69,9 +69,6 @@ export default function Banner() {
             >
               <div className="banner__label-row">
                 <span className="banner__pill">{current.label}</span>
-                <span className="banner__hint">
-                  {String(index + 1).padStart(2, '0')} / {SLIDES.length.toString().padStart(2, '0')}
-                </span>
               </div>
 
               <h1 className="banner__headline">{current.headline}</h1>

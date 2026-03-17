@@ -127,12 +127,30 @@ button {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(234, 238, 255, 0.78);
-  transition: color 0.18s ease, opacity 0.18s ease;
+  position: relative;
+  transition:
+    color 0.18s ease,
+    opacity 0.18s ease;
 }
 
 .navbar__link:hover {
   color: #ffffff;
   opacity: 1;
+}
+
+.navbar__link--active {
+  color: #ffffff;
+}
+
+.navbar__link--active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.35rem;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #6ef0ff, #7a66ff);
 }
 
 /* Theme toggle matching ThemeContext body[data-theme] */
@@ -290,6 +308,13 @@ button {
   }
 }
 
+/* Light theme: mobile nav links white when menu is open */
+@media (max-width: 768px) {
+  body[data-theme='light'] .navbar__nav--open .navbar__link {
+    color: #ffffff;
+  }
+}
+
 /* ===========================
    Intro video full-screen layer
    =========================== */
@@ -389,6 +414,12 @@ button {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .solutions-section__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .solution-card {
@@ -1332,6 +1363,10 @@ body[data-theme='light'] .navbar__link:hover {
   color: #0b1324;
 }
 
+body[data-theme='light'] .navbar__link--active {
+  color: #0b1220;
+}
+
 body[data-theme='light'] .solutions-section,
 body[data-theme='light'] .features-section,
 body[data-theme='light'] .products-section,
@@ -1361,6 +1396,12 @@ body[data-theme='light'] .contact-page__subtitle {
   color: rgba(21, 31, 66, 0.74);
 }
 
+/* Light theme: contact labels (e.g. "Address") black & bold */
+body[data-theme='light'] .contact-page__label {
+  color: #0b1220;
+  font-weight: 700;
+}
+
 body[data-theme='light'] .solution-card,
 body[data-theme='light'] .features-card,
 body[data-theme='light'] .products-stage__card-inner,
@@ -1383,12 +1424,22 @@ body[data-theme='light'] .contact-page__text {
   color: rgba(21, 31, 66, 0.8);
 }
 
+/* Light theme: contact map title text (e.g. SI SOLUTIONS address) black */
+body[data-theme='light'] .contact-page__map-title {
+  color: #0b1220;
+}
+
 body[data-theme='light'] .about-page,
 body[data-theme='light'] .products-page,
 body[data-theme='light'] .solutions-page,
 body[data-theme='light'] .features-page,
 body[data-theme='light'] .contact-page {
   background: #e7ecff;
+  color: #0b1220;
+}
+
+/* Light theme: about-page highlight chips text */
+body[data-theme='light'] .about-page__highlight {
   color: #0b1220;
 }
 
@@ -1400,6 +1451,18 @@ body[data-theme='light'] .footer__text,
 body[data-theme='light'] .footer__link,
 body[data-theme='light'] .footer__bottom {
   color: rgba(15, 23, 42, 0.7);
+}
+
+/* Light theme: footer copyright & powered text black */
+body[data-theme='light'] .footer__copyright,
+body[data-theme='light'] .footer__powered,
+body[data-theme='light'] .footer__powered-link {
+  color: #0b1220;
+}
+
+/* Light theme: footer section titles (e.g. "Company") black */
+body[data-theme='light'] .footer__title {
+  color: #0b1220;
 }
 
 body[data-theme='light'] .footer-social__link {
@@ -1436,6 +1499,14 @@ body[data-theme='light'] .secondary-btn:hover {
     radial-gradient(circle at 100% 100%, rgba(255, 126, 195, 0.18), transparent 60%),
     radial-gradient(circle at 50% 120%, rgba(35, 64, 140, 0.9), #02040f);
   overflow: hidden;
+  min-height: 320px; /* keep overall hero height stable */
+}
+
+@media (max-width: 768px) {
+  .banner {
+    /* extra top padding so it clears the fixed navbar on small screens */
+    padding-top: 5.5rem;
+  }
 }
 
 .banner__inner {
@@ -1445,6 +1516,7 @@ body[data-theme='light'] .secondary-btn:hover {
   grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
   gap: clamp(2.2rem, 5vw, 3.2rem);
   align-items: center;
+  min-height: 260px; /* keep hero height stable across slides */
 }
 
 @media (max-width: 800px) {
@@ -1455,6 +1527,13 @@ body[data-theme='light'] .secondary-btn:hover {
 
 .banner__left {
   min-width: 0;
+}
+
+.banner__copy {
+  min-height: 13rem; /* reserve enough space so text swap doesn't change height */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .banner__label-row {
@@ -1515,14 +1594,10 @@ body[data-theme='light'] .secondary-btn:hover {
   position: relative;
   width: min(320px, 80vw);
   aspect-ratio: 4 / 3;
-  border-radius: 1.6rem;
-  background: radial-gradient(circle at 20% 0, rgba(111, 240, 255, 0.2), transparent 65%),
-    radial-gradient(circle at 100% 100%, rgba(255, 126, 195, 0.28), transparent 60%),
-    linear-gradient(145deg, #050815, #050b1e);
-  box-shadow:
-    0 28px 70px rgba(0, 0, 0, 0.95),
-    0 0 50px rgba(111, 151, 255, 0.45);
-  overflow: hidden;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
 }
 
 .banner-visual__glow {
@@ -1606,4 +1681,30 @@ body[data-theme='light'] .banner-card__description {
 
 body[data-theme='light'] .banner-card__index {
   color: rgba(37, 99, 235, 0.9);
+}
+
+/* Light theme: hero banner description text */
+body[data-theme='light'] .banner__description {
+  color: #0b1220;
+}
+
+/* Light theme: make "Our Mission" heading dark */
+body[data-theme='light'] .about-company__mission .about-company__subheading {
+  color: #0b1220;
+}
+
+/* Light theme: make offering body text dark */
+body[data-theme='light'] .about-company__offering-text {
+  color: #0b1220;
+}
+
+/* Light theme: make "What We Offer" title black & bold */
+body[data-theme='light'] .about-company__offerings-title {
+  color: #0b1220;
+  font-weight: 700;
+}
+
+/* Light theme: make CTA question text dark */
+body[data-theme='light'] .about-company__cta-text {
+  color: #0b1220;
 }
