@@ -1693,6 +1693,11 @@ body[data-theme='light'] .about-company__mission .about-company__subheading {
   color: #0b1220;
 }
 
+/* Light theme: make "Who We Are" heading black */
+body[data-theme='light'] .about-company__about .about-company__subheading {
+  color: #0b1220;
+}
+
 /* Light theme: make offering body text dark */
 body[data-theme='light'] .about-company__offering-text {
   color: #0b1220;

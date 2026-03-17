@@ -7,7 +7,7 @@ const OFFERINGS = [
     id: 1,
     title: 'Advanced Surveillance Systems',
     description:
-      'High-definition cameras, intelligent analytics, and integrated monitoring solutions.',
+      'From high-definition cameras to intelligent video analytics, our range of products is designed to meet diverse security requirements.',
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -27,7 +27,7 @@ const OFFERINGS = [
     id: 2,
     title: 'Customized Solutions',
     description:
-      'Tailored system design to meet your unique residential or commercial requirements.',
+      'We understand that every client is unique. Our team works closely with you to design and implement a surveillance system tailored to your specific needs.',
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -48,7 +48,7 @@ const OFFERINGS = [
     id: 3,
     title: 'Professional Installation',
     description:
-      'Experienced technicians ensuring optimal coverage, configuration, and performance.',
+      'Our skilled technicians above 10 years experienced ensure that your surveillance system is installed correctly and efficiently, providing optimal coverage and performance.',
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -68,7 +68,7 @@ const OFFERINGS = [
     id: 4,
     title: 'Ongoing Support',
     description:
-      'Reliable maintenance and 24/7 assistance to keep your systems running seamlessly.',
+      'We are committed to providing ongoing support and maintenance to ensure your system operates seamlessly, offering peace of mind long after the initial installation.',
     icon: (
       <svg
         viewBox="0 0 24 24"
@@ -103,8 +103,10 @@ export default function AboutCompanySection() {
           <p className="about-company__eyebrow">ABOUT</p>
           <h2 className="about-company__title">About Our Company</h2>
           <p className="about-company__lead">
-            At SI Solutions (Pvt) Ltd, we deliver cutting-edge surveillance systems designed
-            for the evolving security needs of modern environments.
+            At SI Solutions (Pvt) Ltd, we are dedicated to providing cutting-edge surveillance
+            solutions tailored to meet the unique needs of our clients. With a steadfast commitment
+            to security and innovation, we strive to deliver reliable, high-quality products and
+            services that safeguard your assets and enhance your peace of mind.
           </p>
         </motion.header>
 
@@ -115,18 +117,23 @@ export default function AboutCompanySection() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="about-company__about">
-            <h3 className="about-company__subheading">Who we are</h3>
+            <h3 className="about-company__subheading">Who We Are</h3>
             <p className="about-company__text">
-              Since 2019, we have built a reputation as a trusted security partner, combining
-              technical expertise with innovative solutions to safeguard what matters most.
+              Founded in 2019, SI Solutions (Pvt) Ltd has grown to become a trusted leader in the
+              surveillance industry. Our team of seasoned professionals brings together extensive
+              experience and a passion for security technology, enabling us to offer comprehensive
+              solutions that are both effective and efficient.
             </p>
           </div>
           <aside className="about-company__mission">
             <h3 className="about-company__subheading">Our Mission</h3>
             <p className="about-company__text">
-              To provide state-of-the-art surveillance solutions that empower our clients to
-              protect their assets with confidence. Through continuous innovation and a
-              commitment to quality, we deliver reliable, future-ready security systems.
+              Our mission is simple: to provide state-of-the-art surveillance systems that help our
+              clients protect what matters most. We achieve this by continuously investing in
+              research and development, ensuring that our products remain at the forefront of
+              technological advancements. Whether you need a simple home security setup or a
+              complex commercial surveillance network, we have the expertise and resources to
+              deliver exceptional results.
             </p>
           </aside>
         </motion.div>
@@ -165,14 +172,16 @@ export default function AboutCompanySection() {
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
           <p className="about-company__cta-text">
-            Ready to upgrade your security infrastructure?
+            Ready to enhance your security with a top-tier surveillance system? Contact us today
+            to learn more about our products and services or to schedule a consultation with one
+            of our experts.
           </p>
           <button
             type="button"
             className="secondary-btn"
             onClick={() => setIsContactOpen(true)}
           >
-            Contact Us
+            Get in Touch
           </button>
         </motion.div>
       </div>
